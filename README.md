@@ -1,1 +1,2 @@
-# Parser-Cool
+# COOL Compiler #
+

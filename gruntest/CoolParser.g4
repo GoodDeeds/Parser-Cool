@@ -1,9 +1,3 @@
-/*
- * Program to start the implementation of a Parser for Cool
- * Sukrut Rao
- * CS15BTECH11036
- */
-
 parser grammar CoolParser;
 
 options {
@@ -32,48 +26,34 @@ options {
 	Add Grammar rules and appropriate error messages(As per need). Return Null in first rule.
 */
 
-/*
- * The program non-terminal and its productions
- */
-program returns [AST.program value]	: 
+/*program returns [AST.program value]	: 
 						cl=class_list EOF 
 							{
-								$value = null;
+								/*  Null in $value */
+						/*		$value = null;
 							}
-					;
-					
-/*
- * Productions for a list of classes
- */					
+					;*/
+program : class_list EOF;
+
 class_list	:
 		(class_s SEMICOLON)+
 	;
 
-/*
- * Productions for a given class
- */
 class_s   :
 		CLASS TYPEID (INHERITS TYPEID)? LBRACE (feature SEMICOLON)* RBRACE
 	;
 	
-/*
- * Productions for a feature
- */
+
+
 feature	:
 		OBJECTID LPAREN (formal (COMMA formal)*)? RPAREN COLON TYPEID LBRACE expr RBRACE
 	|	OBJECTID COLON TYPEID (ASSIGN expr)?
 	;
-	
-/*
- * Productions for the formal non-terminal
- */
+
 formal	:
 		OBJECTID COLON TYPEID
 	;
 
-/*
- * Productions for expressions
- */
 expr	:
 		OBJECTID ASSIGN expr
 	|	expr (ATSYM TYPEID)? DOT OBJECTID LPAREN (expr (COMMA expr)*)? RPAREN
@@ -82,7 +62,7 @@ expr	:
 	|	WHILE expr LOOP expr POOL
 	|	LBRACE (expr SEMICOLON)+ RBRACE
 	|	LET OBJECTID COLON TYPEID (ASSIGN expr)? (COMMA OBJECTID COLON TYPEID (ASSIGN expr)?)* IN expr
-	|	CASE expr OF (OBJECTID COLON TYPEID DARROW expr SEMICOLON)+ ESAC
+	|	CASE expr OF (OBJECTID COLON TYPEID DARROW expr COMMA)+ ESAC
 	|	NEW TYPEID
 	|	ISVOID expr
 	|	expr PLUS expr
@@ -100,3 +80,5 @@ expr	:
 	|	STR_CONST
 	|	BOOL_CONST
 	;
+
+

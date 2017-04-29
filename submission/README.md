@@ -38,5 +38,6 @@ This project starts the building of a Parser for Cool.
 * This tests for the productions for expr.
 * test5_*.cl files break the rules in these productions.
 
+--
 * Additional test cases with larger, syntactically correct programs have also been provided.
 * As each production rule is tested by the test cases, these test cases give a good indication that the parser functions correctly.
